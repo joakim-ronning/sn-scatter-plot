@@ -35,6 +35,9 @@ describe('createComponents', () => {
       disclaimerModel: {
         query: { getHasSuppressingDisclaimer: sandbox.stub().returns(false) },
       },
+      trendLinesService: {
+        getComponents: sandbox.stub().returns(['trendlines-component']),
+      },
     };
     create = () => createComponents({ context, models, flags, picasso, chart });
     sandbox.stub(createGridLines, 'default').returns('grid-lines');
@@ -65,6 +68,7 @@ describe('createComponents', () => {
       'ref-line-y',
       'points',
       'heat-map',
+      'trendlines-component',
       'axis-x',
       'axis-y',
       'axis-title-x',

@@ -13,6 +13,7 @@ import * as createExtremumModel from '../../models/extremum-model';
 import * as createDisclaimerModel from '../../models/disclaimer-model';
 import * as createPropertiesModel from '../../models/properties-model';
 import * as createDataHandler from '../../data-handler';
+import * as createTrenslinesService from '../../services/trendlines-service';
 import useModels from '../use-models';
 
 describe('use-models', () => {
@@ -94,6 +95,7 @@ describe('use-models', () => {
     sandbox.stub(createTickModel, 'default');
     sandbox.stub(createDisclaimerModel, 'default');
     sandbox.stub(createPropertiesModel, 'default');
+    sandbox.stub(createTrenslinesService, 'default');
 
     create = () => useModels({ core, flags });
   });
@@ -184,6 +186,7 @@ describe('use-models', () => {
         expect(createPropertiesModel.default).to.have.been.calledOnce;
         expect(selectionService.setLayout).to.have.been.calledOnce;
         expect(setModels).to.have.been.calledOnce;
+        expect(createTrenslinesService.default).to.have.been.calledOnce;
       });
     });
   });

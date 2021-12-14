@@ -20,6 +20,7 @@ describe('section', () => {
       COMPONENT: {
         POINT: 'point',
         HEAT_MAP: 'heat-map',
+        TRENDLINES_TOOLTIP_OVERLAY: 'trendlines',
       },
     }));
     sandbox.stub(createNormal, 'default');

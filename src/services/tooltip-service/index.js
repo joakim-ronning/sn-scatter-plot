@@ -10,6 +10,7 @@ export default function createTooltipService({
   layoutService,
   colorService,
   themeService,
+  trendLinesService,
 }) {
   const { fontFamily } = themeService.getStyles();
 
@@ -53,9 +54,16 @@ export default function createTooltipService({
             },
             placement: 'collectible',
           },
+          {
+            keys: [KEYS.COMPONENT.TRENDLINES_TOOLTIP_OVERLAY],
+            collect: {
+              from: 'single',
+            },
+            placement: 'collectible',
+          },
         ],
-        section: ({ nodes, dataset, meta, create, util }) =>
-          createSection({ translator, measureProperties, nodes, dataset, meta, create, util }),
+        section: ({ nodes, dataset, meta, create, h, util }) =>
+          createSection({ translator, measureProperties, nodes, dataset, meta, create, h, util, trendLinesService }),
         layout: {
           grouping: true,
         },

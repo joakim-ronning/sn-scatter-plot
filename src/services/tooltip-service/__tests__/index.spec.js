@@ -12,6 +12,7 @@ describe('tooltip-service', () => {
   let layoutService;
   let colorService;
   let themeService;
+  let trendLinesService;
   let create;
 
   before(() => {
@@ -24,6 +25,7 @@ describe('tooltip-service', () => {
         HEAT_MAP: 'heat-map',
         LEGEND_CAT_TOOLTIP: 'legend-tooltip',
         LEGEND_CATEGORICAL: 'legend',
+        TRENDLINES_TOOLTIP_OVERLAY: 'trendlines-tooltip',
       },
     }));
     sandbox.stub(createSection, 'default');
@@ -55,7 +57,18 @@ describe('tooltip-service', () => {
     themeService = {
       getStyles: sandbox.stub().returns({ fontFamily: 'font-family' }),
     };
-    create = () => createTooltipService({ chart, actions, translator, rtl, layoutService, colorService, themeService });
+    trendLinesService = {};
+    create = () =>
+      createTooltipService({
+        chart,
+        actions,
+        translator,
+        rtl,
+        layoutService,
+        colorService,
+        themeService,
+        trendLinesService,
+      });
   });
 
   after(() => {
@@ -168,6 +181,13 @@ describe('tooltip-service', () => {
             },
             placement: 'collectible',
           },
+          {
+            keys: ['trendlines-tooltip'],
+            collect: {
+              from: 'single',
+            },
+            placement: 'collectible',
+          },
         ]);
       });
 
@@ -179,7 +199,8 @@ describe('tooltip-service', () => {
           const meta = { key: 'meta' };
           const createApi = { key: 'create' };
           const util = { key: 'util' };
-          getConfig().main.section({ nodes, dataset, meta, create: createApi, util });
+          const h = { key: 'h' };
+          getConfig().main.section({ nodes, dataset, meta, create: createApi, util, h });
           expect(
             createSection.default.withArgs({
               translator,
@@ -189,6 +210,8 @@ describe('tooltip-service', () => {
               meta,
               create: createApi,
               util,
+              h,
+              trendLinesService,
             })
           ).to.have.been.calledOnce;
         });
@@ -200,7 +223,8 @@ describe('tooltip-service', () => {
           const meta = { key: 'meta' };
           const createApi = { key: 'create' };
           const util = { key: 'util' };
-          getConfig().main.section({ nodes, dataset, meta, create: createApi, util });
+          const h = { key: 'h' };
+          getConfig().main.section({ nodes, dataset, meta, create: createApi, util, h });
           expect(
             createSection.default.withArgs({
               translator,
@@ -210,6 +234,8 @@ describe('tooltip-service', () => {
               meta,
               create: createApi,
               util,
+              h,
+              trendLinesService,
             })
           ).to.have.been.calledOnce;
         });
